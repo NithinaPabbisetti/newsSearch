@@ -4,7 +4,7 @@ const searchField = document.getElementById("Search-input");
 const searchButton = document.getElementById("search-button");
 async function fetchRandomNews(){
     try{
-        const apiUrl=`https://newsapi.org/v2/top-headlines?country=us&pageSize=15&apiKey=${apiKey}`;
+        const apiUrl=`https://newsapi.org/v2/top-headlines?country=us&pageSize=10&apiKey=${apiKey}`;
         const response= await fetch(apiUrl);
         const data = await response.json();
         return data.articles;
@@ -14,7 +14,7 @@ async function fetchRandomNews(){
     }
 }
 searchButton.addEventListener("click",async ()=>{
-    const query = searchField.value;
+    const query = searchField.value.trim();
     if(query !==""){
         try{
            const articles = await fetchNewsQuery(query);
@@ -48,8 +48,8 @@ function displayBlogs(articles){
         const truncatedTitle = article.title.length>30 ? article.title.slice(0,30)+".....": article.title;
         title.textContent = truncatedTitle;
         const description = document.createElement("p");
-        const truncatedDes = article.title.length>120? article.description.slice(0,120)+".....": article.description;
-        description.textContent = truncatedDes;
+        // const truncatedDes = article.description.length>120 ? article.description.slice(0,120)+".....": article.description;
+        // description.textContent = truncatedDes;
 
         blogCard.appendChild(img);
         blogCard.appendChild(title);
